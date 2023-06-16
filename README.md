@@ -8,7 +8,7 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 
 ## Workflow
 
-- `workflow.sh`: describes the steps and the context in which the scripts described below were used for processing and analysing the whole-genome sequencing data of giraffe.
+- `workflow.txt`: describes the steps and the context in which the scripts described below were used for processing and analysing the whole-genome sequencing data of giraffe.
 
 ### Read quality control
 
@@ -56,10 +56,14 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 
 - `generate_snp_phylo.sh`: infer a phylogeny based on a random subset of SNPs from a BCF file using [bcftools](https://github.com/samtools/bcftools), [vcflib](https://github.com/vcflib/vcflib), [vcf2phylip](https://github.com/edgardomortiz/vcf2phylip), and [IQ-TREE](http://www.iqtree.org/).
 
+### Assembly and phylogeny of mitochondrial genomes
+
+- See `workflow.txt`.
+
 ### Inference of migration events and test for introgression
 
 - `infer_admixture_graphs.sh`: converts a VCF file into TreeMix input with [PLINK](https://www.cog-genomics.org/plink2/) and [`plink2treemix`](https://bitbucket.org/nygcresearch/treemix/downloads/plink2treemix.py), estimates admixture graphs with either [TreeMix](https://bitbucket.org/nygcresearch/treemix) or [OrientAGraph](https://github.com/sriramlab/OrientAGraph) allowing for a range of migration edges (*m*) with multiple bootstrap replicates, and finds the replicate with the highest likelihood per *m* value.
-- `run_dsuite.sh`: calculate Patterson’s D, f4-ratio, and f-branch statistics with [Dsuite](https://github.com/millanek/Dsuite).
+- `estimate_fbranch.sh`: calculate Patterson’s D, f4-ratio, and f-branch statistics with [Dsuite](https://github.com/millanek/Dsuite).
 
 ### Contemporary migration rates
 
