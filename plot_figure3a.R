@@ -8,6 +8,6 @@ par(mar = c(4, 3, 0, 0))
 
 layout(matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, ncol = 2, byrow = T))
 
-plot_tree("treemix.m2.r9", xmin = 0.3, arrow = 0.075, cex = 0.8, lwd = 1.5, flip = c(7, 8, 10, 15, 16, 20, 27, 28))
+plot_tree("orientagraph.m2.r9", xmin = 0.3, arrow = 0.075, cex = 0.8, lwd = 1.5, flip = c(7, 8, 10, 15, 16, 20, 27, 28))
 
 invisible(dev.off())
