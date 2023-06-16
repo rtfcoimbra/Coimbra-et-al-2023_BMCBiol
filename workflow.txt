@@ -291,7 +291,8 @@ mkdir ~/project_kenya/results/mapping_flagstats
 
 mkdir ~/project_kenya/data/bam/{nubian,reticulated,masai,okapi}
 
-# TODO CREATE LINKS FOR EACH SPECIES BAMS
+# manually created symbolic links for each species bams within their
+# corresponding directories created above
 
 mkdir -p ~/project_kenya/results/indel_realignment/{nubian,reticulated,masai,okapi}
 
@@ -613,6 +614,80 @@ mkdir ~/project_kenya/results/snp_phylogeny
   20
 
 ################################################################################
+#                     ASSEMBLY AND PHYLOGENY OF MITOGENOMES                    #
+################################################################################
+
+mkdir ~/project_kenya/results/mitogenomes
+
+cd ~/project_kenya/results/mitogenomes
+
+# assemble mitogenomes
+for r1 in ${storage}/GF*/*_1.fq.gz; do
+  r2=${r1/_1./_2.}
+  sample=$(basename ${r1%_1.fq.gz})
+  get_organelle_from_reads.py \
+    -1 ${r1} \
+    -2 ${r2} \
+    --fast \
+    -k 21,45,65,85,105 \
+    -F animal_mt \
+    -o ${sample} \
+    --which-spades ~/software/SPAdes-3.15.3/bin
+done
+
+mkdir ~/project_kenya/results/mitogenomes/fastas
+
+# copy mitogenome fastas to a new directory and rename them
+for dir in ~/project_kenya/results/mitogenomes/GF*; do
+  fasta=$(find ${dir} -name '*.fasta')
+  sample=$(basename ${dir})
+  cp ${fasta} ~/project_kenya/results/mitogenomes/fastas/${sample}.fasta
+done
+
+# list all mitogenome fastas
+fastas=$(ls -v ~/project_kenya/results/mitogenomes/fastas/*.fasta)
+
+# replace fasta header with sample name
+for fasta in ${fastas}; do
+  sample=$(basename ${fasta} .fasta)
+  sed -i "/^>/ s/[^>].*/${sample}/" ${fasta}
+done
+
+# create multifasta file
+cat \
+  ~/project_kenya/results/mitogenomes/fastas/*.fasta \
+  > ~/project_kenya/results/mitogenomes/mitogenomes.fasta
+
+# align mitogenomes with mafft to auto adjust direction of sequence
+mafft \
+  --localpair \
+  --maxiterate 1000 \
+  --adjustdirectionaccurately \
+  --thread -1 \
+  ~/project_kenya/results/mitogenomes/mitogenomes.fasta \
+  > ~/project_kenya/results/mitogenomes/mitogenomes.aln.fasta
+
+# import 'mitogenomes.aln.fasta' into Geneious:
+# 1. delete all gaps in all sequences
+# 2. circularize mitogenomes
+# 3. adjust start nucleotide
+# 4. export full mitogenome multifasta (for submission to GenBank)
+# 5. export separate multifasta alignments of the 13 protein coding genes (PCG)
+
+# add other publicly available mitochondrial PCG sequences, including outgroup
+# (okapi: JN632674), to each corresponding PCG dataset
+
+# align mitochondrial PCGs with mafft
+for pcg in /path/to/pcgs/*.fasta; do
+  mafft --localpair --maxiterate 1000 --thread -1 ${pcg} > ${pcg%.fasta}.aln.fasta
+done
+
+# manually create a partition file in nexus format for iqtree
+
+# infer mithocondrial phylogeny
+iqtree -T AUTO -o JN632674 -p partitions.nex -B 1000 -alrt 1000 -bnni
+
+################################################################################
 #                         INFERENCE OF MIGRATION EVENTS                        #
 ################################################################################
 
@@ -640,12 +715,25 @@ mkdir ~/project_kenya/results/admixture_graphs
   10 \
   ~/project_kenya/results/admixture_graphs
 
+# graph topologies for orientagraph's highest likelihood runs for m=1 and m=2 were identical
+
+# get the rooted graph from the highest likelihood run for m=1
+grep -Po '\[root .*\] \K.*' \
+  ~/project_kenya/results/admixture_graphs/orientagraph/orientagraph.m1.r2.mltree \
+  > ~/project_kenya/results/admixture_graphs/orientagraph.m1.r2.rooted.nwk
+
 ################################################################################
-#                         INFERENCE OF MIGRATION EVENTS                        #
+#                              TEST FOR GENE FLOW                              #
 ################################################################################
 
-# dsuite
+mkdir ~/project_kenya/results/historical_gene_flow
 
+# estimate D, f4-ratio, and f-branch statistics
+~/project_kenya/scripts/estimate_fbranch.sh \
+  ~/project_kenya/results/snp_phylogeny/snps.sampled.vcf \
+  ~/project_kenya/results/admixture_graphs/orientagraph.m1.r2.rooted.nwk \
+  ~/project_kenya/results/historical_gene_flow/sample_sets.txt \
+  ~/project_kenya/results/historical_gene_flow
 
 ################################################################################
 #                            RECENT MIGRATION RATES                            #
