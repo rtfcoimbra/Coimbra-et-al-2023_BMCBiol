@@ -106,7 +106,7 @@ for(i in 1:11) {
     select(!last_col()) %>%
     as.data.frame()
   ord <- orderInds(pop = as.vector(pop[, 1]), popord = lvls.2)
-  r <- read.table(files[i + 14])
+  r <- read.table(files[i + 11])
   assign(
     paste0("mat", i),
     plotCorRes(

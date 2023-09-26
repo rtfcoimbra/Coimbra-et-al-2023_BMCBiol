@@ -93,7 +93,7 @@ t1.final <- t1.plot %<+% sample.info +
   # add scale bar
   geom_treescale(x = 0, y = 0, fontsize = 3) +
   # add tip labels
-  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 1.8, linesize = 0.1, key_glyph = draw_key_label) +
+  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 6 / .pt, linesize = 0.1, key_glyph = draw_key_label) +
   # add node points (support values)
   geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip)) +
   # add branch labels (support values)
@@ -135,7 +135,7 @@ t2.final <- t2.plot %<+% sample.info +
   # add scale bar
   geom_treescale(x = 0, y = 0, fontsize = 3) +
   # add tip labels
-  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 1.8, linesize = 0.1) +
+  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 6 / .pt, linesize = 0.1) +
   # add node points (support values)
   geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip)) +
   # add legend
@@ -149,11 +149,12 @@ t2.final <- t2.plot %<+% sample.info +
 # create composite plot
 t2.final + t1.final + plot_annotation(tag_levels = "a")
 
-# save plot in '.pdf' format
+# save plot in '.tiff' format
 ggsave(
-  filename = "figure2.pdf",
+  filename = "figure2.tiff",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/",
-  width    = 210,
-  height   = 297,
-  units    = "mm"
+  width    = 8.5,
+  height   = 11,
+  units    = "in",
+  dpi      = 600
 )

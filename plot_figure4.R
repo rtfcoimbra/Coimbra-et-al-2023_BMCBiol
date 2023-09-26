@@ -66,13 +66,13 @@ p <- p + annotation_logticks(size = 0.2)
 p + annotate(geom = "text", x = 9700, y = 500000, label = "Holocene", hjust = "inward", size = 2.5) +
   annotate(geom = "text", x = 13700, y = 500000, label = "Pleistocene", hjust = "outward", size = 2.5)
 
-# save plot in '.png' format
+# save plot in '.tiff' format
 ggsave(
-  filename = "figure4.png",
+  filename = "figure4.tiff",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/revised/",
   width    = 170,
   height   = 170,
   units    = "mm",
-  bg       = "white",
-  dpi      = 300
+  #bg       = "white",
+  dpi      = 600
 )

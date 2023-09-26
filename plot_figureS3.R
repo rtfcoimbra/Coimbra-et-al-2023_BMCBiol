@@ -88,7 +88,7 @@ theme_middle <- theme(
   axis.title.x        = element_blank(),
   axis.title.y        = element_text(size = 7),
   axis.text.x         = element_blank(),
-  axis.text.y         = element_text(size = 4),
+  axis.text.y         = element_text(size = 5),
   axis.ticks.length.y = unit(0, "lines"),
   strip.background    = element_blank(),
   strip.text          = element_blank(),
@@ -102,7 +102,7 @@ theme_top <- theme_middle + theme(
 
 # set theme modifiers for bottom plot
 theme_bottom <- theme_middle + theme(
-  axis.text.x = element_text(size = 4, angle = 90, vjust = 0.5, hjust = 1)
+  axis.text.x = element_text(size = 5, angle = 90, vjust = 0.5, hjust = 1)
 )
 
 ################################################################################
@@ -178,7 +178,7 @@ p.k2 / p.k3 / p.k4 / p.k5 / p.k6 / p.k7 / p.k8 / p.k9 / p.k10 / p.k11
 ggsave(
   filename = "figureS3.png",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/revised",
-  width    = 210,
+  width    = 220,
   height   = 230,
   units    = "mm",
   dpi      = 300

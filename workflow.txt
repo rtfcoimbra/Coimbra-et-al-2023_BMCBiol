@@ -356,12 +356,12 @@ mkdir -p ~/project_kenya/results/depth_stats/{sample,global,nubian,reticulated,m
   20
 
 # individuals excluded from GL- and GC-based analyses due to extremely
-# low mean depth (< 1x): GF088 and GF184
+# low depth (mean < 1x or median < 2x): GF088 and GF184
 
-# individuals excluded from GC-based analyses due to very low mean depth
-# (< 6x): GF085, GF097, GF109, GF114, GF115, GF117, GF126, GF130, GF132,
-# GF137, GF156, GF159, GF164, GF165, GF168, GF182, GF189, GF193, GF194,
-# GF233, and ISC01
+# individuals excluded from GC-based analyses due to very low depth
+# (mean < 6x or median < 8x): GF085, GF097, GF109, GF114, GF115, GF117,
+# GF126, GF130, GF132, GF137, GF156, GF159, GF164, GF165, GF168, GF182,
+# GF189, GF193, GF194, GF233, and ISC01
 
 # iterate over species
 for spp in 'masai' 'nubian' 'reticulated'; do

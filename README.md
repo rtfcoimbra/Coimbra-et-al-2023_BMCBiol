@@ -78,7 +78,7 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 
 - **Figure 1:** [QGIS](https://www.qgis.org/en/site/) + `plot_figure1b-e.R` + `visFuns_modified.R` (script slightly modified from [`visFuns.R`](https://github.com/GenisGE/evalAdmix/blob/master/visFuns.R) from [evalAdmix](https://github.com/GenisGE/evalAdmix))
 - **Figure 2:** `plot_figure2.R`
-- **Figure 3:** `plot_figure3a.R` + `run_dsuite.sh` + `plot_figure3c.R`
+- **Figure 3:** `plot_figure3a.R` + `estimate_fbranch.sh` + `plot_figure3c.R`
 - **Figure 4:** `plot_figure4.R`
 - **Figure S1:** `plot_figureS1.R`
 - **Figure S2:** `plot_figureS2.R`

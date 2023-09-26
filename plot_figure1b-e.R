@@ -52,8 +52,8 @@ make_ancestry_plot <- function(tbl, palette){
       theme(
         panel.spacing.x     = unit(0, "lines"),
         axis.title          = element_text(size = 8),
-        axis.text.x         = element_text(size = 3, angle = 90, vjust = 0.5, hjust = 1, margin = margin(t = -1)),
-        axis.text.y         = element_text(size = 5),
+        axis.text.x         = element_text(size = 3.2, angle = 90, vjust = 0.5, hjust = 1, margin = margin(t = -1)),
+        axis.text.y         = element_text(size = 6),
         axis.ticks.length.y = unit(0, "lines"),
         strip.text          = element_blank(),
         strip.background    = element_blank(),
@@ -178,7 +178,7 @@ panel.b <- ggplot(data = tbl, mapping = aes(x = PC1, y = PC2)) +
   theme_light() +
   theme(
     axis.title        = element_text(size = 8),
-    axis.text         = element_text(size = 5),
+    axis.text         = element_text(size = 6),
     legend.title      = element_blank(),
     legend.text       = element_text(size = 7),
     legend.key.size   = unit(0.1, "lines"),
@@ -248,7 +248,7 @@ panel.d <- ggplot(tbl.likes, aes(x = k, y = mean)) +
   theme_light() +
   theme(
     axis.title      = element_text(size = 8),
-    axis.text       = element_text(size = 5),
+    axis.text       = element_text(size = 6),
     axis.text.y     = element_text(angle = 90, hjust = 0.5),
     legend.position = "none"
   )
@@ -270,7 +270,7 @@ for(i in c(3, 9)) {
     select(!last_col()) %>%
     as.data.frame()
   ord <- orderInds(pop = as.vector(pop[, 1]), popord = lvls.2)
-  r <- read.table(files[i + 14])
+  r <- read.table(files[i + 11])
   assign(
     paste0("mat", i),
     plotCorRes(
@@ -351,12 +351,12 @@ spacer <- ggplot() + theme_void()
   plot_layout(nrow = 3, heights = c(2/3, 1/5, 1/5)) +
   plot_annotation(tag_levels = c("a"))
 
-# save figure in '.pdf' format
+# save figure in '.tiff' format
 ggsave(
-  filename = "figure1.pdf",
+  filename = "figure1.tiff",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/revised/",
   width    = 210,
   height   = 297,
   units    = "mm",
-  dpi      = 300
+  dpi      = 600
 )

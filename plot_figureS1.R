@@ -121,7 +121,7 @@ rm(bams, metadata, sample.info, tmp, df)
 ################################################################################
 
 # plot pairwise k0 as a proxy for relatedness
-p1 <- ggcorrplot(mat, type = "full", tl.cex = 3, tl.srt = 90) +
+p1 <- ggcorrplot(mat, type = "full", tl.cex = 3.5, tl.srt = 90) +
   geom_vline(xintercept = c(37.5, 76.5), linewidth = 0.3, color = "grey") +
   geom_hline(yintercept = c(37.5, 76.5), linewidth = 0.3, color = "grey") +
   scale_fill_viridis_c(option = "plasma", direction = -1, limit = c(0, 1)) +
@@ -206,7 +206,7 @@ palette <- c(
 # plot pairwise relatedness as k1 by k2
 p3 <- ggplot(data = data, mapping = aes(x = k1, y = k2)) +
   geom_point(size = 1, aes(colour = status), alpha = 0.5) +
-  scale_color_manual(title = expression(italic("k"[0])), values = palette) +
+  scale_color_manual(name = expression(italic("k"[0])), values = palette) +
   labs(
     x = expression(italic("k"[1])),
     y = expression(italic("k"[2]))
