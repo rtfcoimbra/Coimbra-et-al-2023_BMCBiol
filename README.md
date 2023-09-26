@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/654386282.svg)](https://zenodo.org/badge/latestdoi/654386282)
+
 # Code from: Genomic analysis reveals limited hybridization among three giraffe species in Kenya
 
 Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.* (2023):
