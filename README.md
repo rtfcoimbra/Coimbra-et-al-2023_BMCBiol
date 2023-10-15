@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/654386282.svg)](https://zenodo.org/badge/latestdoi/654386282)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8380994.svg)](https://doi.org/10.5281/zenodo.8380994)
 
 # Code from: Genomic analysis reveals limited hybridization among three giraffe species in Kenya
 
