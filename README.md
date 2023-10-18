@@ -1,14 +1,16 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8380994.svg)](https://doi.org/10.5281/zenodo.8380994)
+
 # Code from: Genomic analysis reveals limited hybridization among three giraffe species in Kenya
 
 Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.* (2023):
 
-- Coimbra RTF, Winter S, Muneza A, Fennessy S, Otiende M, Mijele D, Masiaine S, Stacy-Dawes J, Fennessy J, Janke A (2023) Genomic analysis reveals limited hybridization among three giraffe species in Kenya. *BMC Biology*, under review.
+- Coimbra RTF, Winter S, Muneza A, Fennessy S, Otiende M, Mijele D, Masiaine S, Stacy-Dawes J, Fennessy J, Janke A (2023) Genomic analysis reveals limited hybridization among three giraffe species in Kenya. *BMC Biology*, 21:215. DOI: https://doi.org/10.1186/s12915-023-01722-y
 
 **Note:** The plotting scripts do not necessarily reproduce the figures exactly as shown in the paper. In some cases, I used a free image editing software, namely [Krita](https://krita.org/en/), to assemble independent plots and add or correct plot annotations.
 
 ## Workflow
 
-- `workflow.txt`: describes the steps and the context in which the scripts described below were used for processing and analysing the whole-genome sequencing data of giraffe.
+- `workflow.txt`: describes the steps and the context in which the scripts described below were used for processing and analyzing the whole-genome sequencing data of giraffe.
 
 ### Read quality control
 
@@ -18,8 +20,8 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 
 - `map_reads_v2.sh`: map reads against the Masai giraffe assembly with [BWA](https://github.com/lh3/bwa) and sort the output BAMs with [samtools](https://github.com/samtools/samtools).
 - `mark_duplicates.sh`: mark PCR/optical duplicate reads with [Picard MarkDuplicates](https://broadinstitute.github.io/picard/).
-- `mapping_flagstats.sh`: caculate mapping statistics with [samtools](https://github.com/samtools/samtools).
-- `realigner_target_creator.sh`: create list of target intervals for indel realignment with [GATK](https://software.broadinstitute.org/gatk/).
+- `mapping_flagstats.sh`: calculate mapping statistics with [samtools](https://github.com/samtools/samtools).
+- `realigner_target_creator.sh`: create a list of target intervals for indel realignment with [GATK](https://software.broadinstitute.org/gatk/).
 - `indel_realigner.sh`: perform local realignment around indels with [GATK](https://software.broadinstitute.org/gatk/).
 - `clean_bams_v3.sh`: remove bad reads (flags 4, 256, 512, or 1024) from BAM files and keep only properly paired reads (flag 2) mapped to non-repetitive regions in autosomes with [samtools](https://github.com/samtools/samtools).
 
@@ -44,7 +46,7 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 ### Relatedness
 
 - `infer_relatedness.sh`: infer pairwise relatedness among individuals based with [NGSadmix](http://www.popgen.dk/software/index.php/NgsAdmix) and [NGSremix](https://github.com/KHanghoj/NGSremix).
-- `plot_figureS1.R`: plot relatedness coefficient as a heatmap and find the number of individuals to exclude (and identify them) for increasing thresholds of relatedness. ***Note:** this script was co-developed with Emma Vinson.*
+- `plot_figureS1.R`: plot the relatedness coefficient as a heatmap and find the number of individuals to exclude (and identify them) for increasing thresholds of relatedness. ***Note:** this script was co-developed with Emma Vinson.*
 
 ### Population structure and admixture analyses
 
@@ -67,7 +69,7 @@ Code used to analyze whole-genome sequencing data of giraffe in Coimbra *et al.*
 
 ### Contemporary migration rates
 
-- `run_ba3-snps.sh`: estimate comtemporary migration rates based on a random subset of SNPs from a BCF file using [bcftools](https://github.com/samtools/bcftools), [vcflib](https://github.com/vcflib/vcflib), [stacks](http://catchenlab.life.illinois.edu/stacks/), [stacksStr2immanc.pl](https://github.com/stevemussmann/file_converters/blob/master/stacksStr2immanc.pl), [BA3-SNPS-autotune](https://github.com/stevemussmann/BA3-SNPS-autotune) and [BA3-SNPS](https://github.com/stevemussmann/BayesAss3-SNPs).
+- `run_ba3-snps.sh`: estimate contemporary migration rates based on a random subset of SNPs from a BCF file using [bcftools](https://github.com/samtools/bcftools), [vcflib](https://github.com/vcflib/vcflib), [stacks](http://catchenlab.life.illinois.edu/stacks/), [stacksStr2immanc.pl](https://github.com/stevemussmann/file_converters/blob/master/stacksStr2immanc.pl), [BA3-SNPS-autotune](https://github.com/stevemussmann/BA3-SNPS-autotune) and [BA3-SNPS](https://github.com/stevemussmann/BayesAss3-SNPs).
 
 ### Demographic reconstruction
 
