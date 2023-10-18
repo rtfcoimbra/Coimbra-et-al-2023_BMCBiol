@@ -51,9 +51,9 @@ make_ancestry_plot <- function(tbl, palette){
       theme_minimal() +
       theme(
         panel.spacing.x     = unit(0, "lines"),
-        axis.title          = element_text(size = 8),
-        axis.text.x         = element_text(size = 3.2, angle = 90, vjust = 0.5, hjust = 1, margin = margin(t = -1)),
-        axis.text.y         = element_text(size = 6),
+        axis.title          = element_text(size = 7.5),
+        axis.text.x         = element_blank(),
+        axis.text.y         = element_text(size = 5.8),
         axis.ticks.length.y = unit(0, "lines"),
         strip.text          = element_blank(),
         strip.background    = element_blank(),
@@ -168,7 +168,7 @@ eigen <- tibble(
 
 # pca plot
 panel.b <- ggplot(data = tbl, mapping = aes(x = PC1, y = PC2)) +
-  geom_point(mapping = aes(color = taxonomy, shape = taxonomy), size = 1.5) +
+  geom_point(mapping = aes(color = taxonomy, shape = taxonomy), size = 1.4) +
   scale_shape_manual(values = shapes) +
   scale_color_manual(values = palette) +
   labs(
@@ -177,15 +177,16 @@ panel.b <- ggplot(data = tbl, mapping = aes(x = PC1, y = PC2)) +
   ) +
   theme_light() +
   theme(
-    axis.title        = element_text(size = 8),
-    axis.text         = element_text(size = 6),
+    axis.title        = element_text(size = 7.5),
+    axis.text         = element_blank(),
+    axis.ticks        = element_blank(),
     legend.title      = element_blank(),
-    legend.text       = element_text(size = 7),
-    legend.key.size   = unit(0.1, "lines"),
+    legend.text       = element_text(size = 5.8),
+    legend.key.size   = unit(0.15, "lines"),
     legend.background = element_rect(fill = "transparent"),
-    legend.position   = c(0.245, 0.135)
+    legend.position   = c(0.24, 0.13)
   ) +
-  guides(shape = guide_legend(override.aes = list(size = 1.5)))
+  guides(shape = guide_legend(override.aes = list(size = 1.4)))
 
 # clean environment
 rm(sample.info, cov.mat)
@@ -205,10 +206,8 @@ qopts <- files %>% map(make_ancestry_tibble, tbl = tbl)
 
 # plot ancestry porportions
 p.k3 <- make_ancestry_plot(qopts[[3]], c("#009f72", "#cc79a7", "#d55e00")) +
-  theme(
-    axis.title.x = element_blank(),
-    axis.text.x  = element_blank()
-  )
+  theme(axis.title.x = element_blank())
+
 p.k9  <- make_ancestry_plot(qopts[[9]],  c("#cc79a7", "#b44582", "#e18e4c", "#006c4d", "#954100", "#d55e00", "#b2e2d4", "#66c5aa", "#009f72"))
 
 # arrange composite plot layout
@@ -247,8 +246,8 @@ panel.d <- ggplot(tbl.likes, aes(x = k, y = mean)) +
   ) +
   theme_light() +
   theme(
-    axis.title      = element_text(size = 8),
-    axis.text       = element_text(size = 6),
+    axis.title      = element_text(size = 7.5),
+    axis.text       = element_text(size = 5.8),
     axis.text.y     = element_text(angle = 90, hjust = 0.5),
     legend.position = "none"
   )
@@ -327,8 +326,8 @@ m9 <- ggcorrplot(mat9, type = "full", show.diag = TRUE) +
   theme(
     axis.text.x       = element_blank(),
     axis.text.y       = element_blank(),
-    legend.title      = element_text(size = 8),
-    legend.text       = element_text(size = 6),
+    legend.title      = element_text(size = 7.5),
+    legend.text       = element_text(size = 5.8),
     legend.key.width  = unit(1, "lines"),
     legend.key.height = unit(1, "lines"),
     legend.text.align = 1,
@@ -355,8 +354,8 @@ spacer <- ggplot() + theme_void()
 ggsave(
   filename = "figure1.tiff",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/revised/",
-  width    = 210,
-  height   = 297,
+  width    = 174,
+  height   = 230,
   units    = "mm",
   dpi      = 600
 )

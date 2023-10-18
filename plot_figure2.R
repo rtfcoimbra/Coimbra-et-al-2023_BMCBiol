@@ -84,18 +84,18 @@ t1.pruned <- drop.tip(t1, "JN632674")
 #nodelabels(cex = 0.75, frame = "circle")
 
 # create the basic plot
-t1.plot <- ggtree(tr = t1.pruned, layout = "roundrect", ladderize = TRUE)
+t1.plot <- ggtree(tr = t1.pruned, layout = "roundrect", ladderize = TRUE, size = 0.35)
 
 # add taxonomy tibble to tree plot
 t1.final <- t1.plot %<+% sample.info +
   # adjust x-axis plot limit
   xlim(0, 0.05) +
   # add scale bar
-  geom_treescale(x = 0, y = 0, fontsize = 3) +
+  geom_treescale(x = 0, y = 0, fontsize = 6.5 / .pt) +
   # add tip labels
-  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 6 / .pt, linesize = 0.1, key_glyph = draw_key_label) +
+  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 5.2 / .pt, linesize = 0.25, key_glyph = draw_key_label) +
   # add node points (support values)
-  geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip)) +
+  geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip), size = 1.2) +
   # add branch labels (support values)
   #geom_text2(mapping = aes(x = branch,
   #                         label = label,
@@ -108,7 +108,7 @@ t1.final <- t1.plot %<+% sample.info +
     legend.title    = element_text(face = "bold", size = 10),
     legend.text     = element_text(size = 9), # face = "italic"
     legend.key.size = unit(0.8, "line"),
-    legend.position = c(0.28, 0.92)
+    legend.position = c(0.25, 0.88)
   ) +
   guides(color = guide_legend(override.aes = list(size = 4, linetype = 0)))
 
@@ -126,18 +126,18 @@ t2 <- read.iqtree("snps.sampled.min4.phy.varsites.phy.treefile")
 t2.pruned <- drop.tip(t2, "WOAK")
 
 # create the basic plot
-t2.plot <- ggtree(tr = t2.pruned, layout = "roundrect", ladderize = TRUE)
+t2.plot <- ggtree(tr = t2.pruned, layout = "roundrect", ladderize = TRUE, size = 0.35)
 
 # add taxonomy tibble to tree plot
 t2.final <- t2.plot %<+% sample.info +
   # adjust x-axis plot limit
   xlim(0, 0.01) +
   # add scale bar
-  geom_treescale(x = 0, y = 0, fontsize = 3) +
+  geom_treescale(x = 0, y = 0, fontsize = 6.5 / .pt) +
   # add tip labels
-  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 6 / .pt, linesize = 0.1) +
+  geom_tiplab(mapping = aes(color = taxonomy), align = TRUE, size = 5.6 / .pt, linesize = 0.25) +
   # add node points (support values)
-  geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip)) +
+  geom_point2(mapping = aes(subset = as.numeric(sub("/.*", "", label)) >= 80 & as.numeric(sub(".*/", "", label)) >= 95 & !isTip), size = 1.2) +
   # add legend
   scale_color_manual("Taxonomy", labels = lvls, values = palette) +
   theme(legend.position = "none")
@@ -147,14 +147,14 @@ t2.final <- t2.plot %<+% sample.info +
 ################################################################################
 
 # create composite plot
-t2.final + t1.final + plot_annotation(tag_levels = "a")
+t2.final + t1.final #+ plot_annotation(tag_levels = "a")
 
 # save plot in '.tiff' format
 ggsave(
   filename = "figure2.tiff",
   path     = "~/documents/rcoimbra_phd/project_kenya/figures/",
-  width    = 8.5,
-  height   = 11,
-  units    = "in",
+  width    = 170,
+  height   = 233,
+  units    = "mm",
   dpi      = 600
 )
